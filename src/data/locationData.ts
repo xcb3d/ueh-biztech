@@ -1,0 +1,229 @@
+import type { Location } from '@/types/map-types';
+
+export const locations: Location[] = [
+  // Miền Bắc
+  {
+    id: 'hanoi-hoguom',
+    name: 'Hồ Gươm (Hồ Hoàn Kiếm)',
+    coordinates: { lat: 21.0287, lng: 105.8522 },
+    region: 'Bắc',
+    heroImage: '/images/locations/ho-guom.jpg',
+    summary:
+      'Là "trái tim" của Thủ đô Hà Nội, gắn liền với truyền thuyết trả gươm báu cho Rùa Vàng, một biểu tượng lịch sử và văn hóa không thể tách rời của người Việt Nam.',
+    articleContent: `
+## Biểu Tượng Ngàn Năm Văn Hiến
+
+Hồ Gươm không chỉ là một địa danh, mà là một chứng nhân lịch sử đã đi qua bao thăng trầm cùng Thăng Long - Hà Nội. Tên gọi Hoàn Kiếm gắn liền với truyền thuyết Vua Lê Lợi trả lại gươm thần cho Rùa Vàng sau khi đánh đuổi quân Minh, một câu chuyện biểu trưng cho khát vọng hòa bình của dân tộc.
+
+### Các Điểm Tham Quan Chính
+
+*   **Tháp Rùa:** Nằm trên gò đất nhỏ giữa hồ, hình ảnh mang tính biểu tượng nhất của Hà Nội.
+*   **Đền Ngọc Sơn:** Nằm trên Đảo Ngọc, được nối với bờ bằng cây **Cầu Thê Húc** sơn màu đỏ son đặc trưng.
+*   **Tháp Bút - Đài Nghiên:** Biểu tượng cho tinh thần hiếu học của người Hà Nội xưa.
+
+Ngày nay, khu vực quanh Hồ Gươm là không gian đi bộ vào cuối tuần, một trung tâm sinh hoạt văn hóa, giải trí của người dân Thủ đô và du khách.
+    `,
+    category: 'danh-lam-thang-canh',
+    historicalFact: 'Tên gọi "Hồ Gươm" xuất phát từ truyền thuyết vua Lê Lợi trả lại gươm báu cho Rùa Vàng sau khi chiến thắng giặc Minh.',
+    type: 'location',
+  },
+  {
+    id: 'hanoi-phoco',
+    name: 'Phố cổ Hà Nội',
+    coordinates: { lat: 21.0333, lng: 105.8500 },
+    region: 'Bắc',
+    heroImage: '/images/locations/hoi-an.jpg',
+    summary:
+      'Khu vực đô thị có từ lâu đời của Hà Nội, nơi tập trung nhiều hàng quán, di tích và hoạt động văn hóa đặc sắc.',
+    articleContent: `
+## Nơi Thời Gian Ngưng Đọng
+
+Hội An từng là một trung tâm giao thương lớn của Đông Nam Á vào thế kỷ 16-17. Sự giao thoa của các nền văn hóa Nhật Bản, Trung Hoa và phương Tây đã tạo nên một tổng thể kiến trúc và văn hóa vô cùng đặc sắc.
+
+### Nét Đặc Trưng Của Hội An
+
+*   **Chùa Cầu:** Công trình biểu tượng do các thương nhân Nhật Bản xây dựng, là linh hồn của khu phố cổ.
+*   **Những ngôi nhà cổ:** Các ngôi nhà như Nhà cổ Tấn Ký, Nhà cổ Phùng Hưng vẫn được bảo tồn gần như nguyên vẹn.
+*   **Đèn lồng:** Khi đêm xuống, cả khu phố được thắp sáng bởi hàng nghìn chiếc đèn lồng thủ công, tạo nên một không gian huyền ảo, đầy chất thơ.
+
+Dạo bước trong khu phố cổ, thưởng thức những món ăn đặc sản như Cao Lầu, Mì Quảng là những trải nghiệm không thể nào quên.
+    `,
+    category: 'kien-truc-nghe-thuat',
+    historicalFact: 'Phố cổ Hà Nội nguyên bản bao gồm 36 phố phường, mỗi phố lại chuyên bán một loại mặt hàng đặc trưng riêng.',
+    type: 'location',
+  },
+
+  // Miền Trung
+  {
+    id: 'hoian-pho-co',
+    name: 'Phố cổ Hội An',
+    coordinates: { lat: 15.8801, lng: 108.338 },
+    region: 'Trung',
+    heroImage: '/images/locations/hoi-an.jpg',
+    summary:
+      'Một thương cảng quốc tế sầm uất xưa kia, nơi thời gian như ngừng lại trong những ngôi nhà cổ tường vàng, những con hẻm nhỏ và những chiếc đèn lồng lung linh.',
+    articleContent: `
+## Nơi Thời Gian Ngưng Đọng
+
+Hội An từng là một trung tâm giao thương lớn của Đông Nam Á vào thế kỷ 16-17. Sự giao thoa của các nền văn hóa Nhật Bản, Trung Hoa và phương Tây đã tạo nên một tổng thể kiến trúc và văn hóa vô cùng đặc sắc.
+
+### Nét Đặc Trưng Của Hội An
+
+*   **Chùa Cầu:** Công trình biểu tượng do các thương nhân Nhật Bản xây dựng, là linh hồn của khu phố cổ.
+*   **Những ngôi nhà cổ:** Các ngôi nhà như Nhà cổ Tấn Ký, Nhà cổ Phùng Hưng vẫn được bảo tồn gần như nguyên vẹn.
+*   **Đèn lồng:** Khi đêm xuống, cả khu phố được thắp sáng bởi hàng nghìn chiếc đèn lồng thủ công, tạo nên một không gian huyền ảo, đầy chất thơ.
+
+Dạo bước trong khu phố cổ, thưởng thức những món ăn đặc sản như Cao Lầu, Mì Quảng là những trải nghiệm không thể nào quên.
+    `,
+    category: 'kien-truc-nghe-thuat',
+    historicalFact: 'Chùa Cầu, biểu tượng của Hội An, còn được gọi là "Cầu Nhật Bản" và được in trên mặt sau của tờ tiền 20.000 VNĐ.',
+    type: 'location',
+  },
+  {
+    id: 'hue-da-noi',
+    name: 'Đại Nội Huế',
+    coordinates: { lat: 16.4678, lng: 107.5785 },
+    region: 'Trung',
+    heroImage: '/images/locations/ho-guom.jpg',
+    summary:
+      'Quần thể kiến trúc cung đình của triều Nguyễn, một di sản văn hóa thế giới với vẻ đẹp cổ kính và tráng lệ.',
+    articleContent: `
+## Chứng Nhân Lịch Sử
+
+Dinh Độc Lập, hay Dinh Thống Nhất, không chỉ là một công trình kiến trúc độc đáo mà còn là nơi gắn liền với nhiều sự kiện lịch sử quan trọng của Việt Nam. Được thiết kế bởi kiến trúc sư Ngô Viết Thụ, công trình là sự kết hợp hài hòa giữa kiến trúc hiện đại và các yếu tố phong thủy Á Đông.
+
+### Bên Trong Dinh Có Gì?
+
+*   **Các phòng khánh tiết:** Nơi diễn ra các cuộc họp, tiếp khách quan trọng của chế độ cũ.
+*   **Hầm chỉ huy:** Hệ thống hầm ngầm kiên cố với đầy đủ các phòng tác chiến, truyền tin.
+*   **Phòng làm việc của Tổng thống:** Tái hiện không gian làm việc của người đứng đầu chính quyền Sài Gòn.
+
+Tham quan Dinh Độc Lập là một hành trình quay ngược thời gian, tìm hiểu về một giai đoạn lịch sử đầy biến động của đất nước.
+    `,
+    category: 'kien-truc-nghe-thuat',
+    historicalFact: 'Đại Nội Huế là nơi ở và làm việc của 13 vị vua triều Nguyễn, triều đại phong kiến cuối cùng của Việt Nam.',
+    type: 'location',
+  },
+  {
+    id: 'danang-caurong',
+    name: 'Cầu Rồng Đà Nẵng',
+    coordinates: { lat: 16.0614, lng: 108.2272 },
+    region: 'Trung',
+    heroImage: '/images/locations/ha-long.jpg',
+    summary: 'Cây cầu hiện đại với hình dáng con rồng có khả năng phun lửa và nước vào cuối tuần.',
+    articleContent: `
+## Kỳ Quan Thiên Nhiên Của Thế Giới
+
+Vịnh Hạ Long là một điểm đến độc đáo với hệ thống đảo đá và hang động kỳ vĩ. Trải qua hàng triệu năm kiến tạo địa chất, vịnh sở hữu hơn 1.600 hòn đảo lớn nhỏ, mỗi hòn đảo mang một cái tên gợi hình như Hòn Gà Chọi, Hòn Đỉnh Hương...
+
+### Hoạt Động Không Thể Bỏ Lỡ
+
+1.  **Du thuyền trên vịnh:** Cách tốt nhất để chiêm ngưỡng trọn vẹn vẻ đẹp của Hạ Long.
+2.  **Chèo thuyền Kayak:** Luồn lách qua các hang động và khu vực nước lặng để khám phá ở cự ly gần.
+3.  **Tham quan hang động:** Khám phá các hang động nổi tiếng như Hang Sửng Sốt, Hang Đầu Gỗ với hệ thống thạch nhũ tráng lệ.
+
+Vẻ đẹp của Vịnh Hạ Long là sự hòa quyện giữa hùng vĩ và thơ mộng, một nơi nhất định phải đến một lần trong đời.
+    `,
+    category: 'danh-lam-thang-canh',
+    historicalFact: 'Cầu Rồng có thể phun lửa trong 2 phút và phun nước trong 3 phút vào 9 giờ tối mỗi thứ Bảy, Chủ Nhật.',
+    type: 'location',
+  },
+
+  // Miền Nam
+  {
+    id: 'hcm',
+    name: 'Bưu điện Trung tâm Sài Gòn',
+    coordinates: { lat: 10.7797, lng: 106.6994 },
+    region: 'Nam',
+    heroImage: '/images/locations/dinh-doc-lap.jpg',
+    summary: 'Công trình kiến trúc độc đáo do người Pháp xây dựng, một biểu tượng của thành phố Hồ Chí Minh.',
+    articleContent: `
+## Chứng Nhân Lịch Sử
+
+Dinh Độc Lập, hay Dinh Thống Nhất, không chỉ là một công trình kiến trúc độc đáo mà còn là nơi gắn liền với nhiều sự kiện lịch sử quan trọng của Việt Nam. Được thiết kế bởi kiến trúc sư Ngô Viết Thụ, công trình là sự kết hợp hài hòa giữa kiến trúc hiện đại và các yếu tố phong thủy Á Đông.
+
+### Bên Trong Dinh Có Gì?
+
+*   **Các phòng khánh tiết:** Nơi diễn ra các cuộc họp, tiếp khách quan trọng của chế độ cũ.
+*   **Hầm chỉ huy:** Hệ thống hầm ngầm kiên cố với đầy đủ các phòng tác chiến, truyền tin.
+*   **Phòng làm việc của Tổng thống:** Tái hiện không gian làm việc của người đứng đầu chính quyền Sài Gòn.
+
+Tham quan Dinh Độc Lập là một hành trình quay ngược thời gian, tìm hiểu về một giai đoạn lịch sử đầy biến động của đất nước.
+    `,
+    category: 'kien-truc-nghe-thuat',
+    historicalFact: 'Bưu điện được thiết kế bởi Gustave Eiffel, cùng kiến trúc sư với Tháp Eiffel và Tượng Nữ thần Tự do.',
+    type: 'location',
+  },
+  {
+    id: 'hcm-dinhdoclap',
+    name: 'Dinh Độc Lập',
+    coordinates: { lat: 10.7769, lng: 106.6953 },
+    region: 'Nam',
+    heroImage: '/images/locations/dinh-doc-lap.jpg',
+    summary: 'Nơi ghi dấu khoảnh khắc lịch sử trọng đại ngày 30/04/1975, thống nhất đất nước.',
+    articleContent: `
+## Chứng Nhân Lịch Sử
+
+Dinh Độc Lập, hay Dinh Thống Nhất, không chỉ là một công trình kiến trúc độc đáo mà còn là nơi gắn liền với nhiều sự kiện lịch sử quan trọng của Việt Nam. Được thiết kế bởi kiến trúc sư Ngô Viết Thụ, công trình là sự kết hợp hài hòa giữa kiến trúc hiện đại và các yếu tố phong thủy Á Đông.
+
+### Bên Trong Dinh Có Gì?
+
+*   **Các phòng khánh tiết:** Nơi diễn ra các cuộc họp, tiếp khách quan trọng của chế độ cũ.
+*   **Hầm chỉ huy:** Hệ thống hầm ngầm kiên cố với đầy đủ các phòng tác chiến, truyền tin.
+*   **Phòng làm việc của Tổng thống:** Tái hiện không gian làm việc của người đứng đầu chính quyền Sài Gòn.
+
+Tham quan Dinh Độc Lập là một hành trình quay ngược thời gian, tìm hiểu về một giai đoạn lịch sử đầy biến động của đất nước.
+    `,
+    category: 'lich-su',
+    historicalFact: 'Chiếc xe tăng số hiệu 843 của quân giải phóng đã húc đổ cổng phụ của Dinh vào ngày 30/04/1975.',
+    type: 'location',
+  },
+  {
+    id: 'dong-son',
+    name: 'Di chỉ khảo cổ Đông Sơn',
+    coordinates: { lat: 19.8, lng: 105.78 },
+    region: 'Bắc',
+    heroImage: '/images/locations/dong-son.jpg',
+    summary: 'Nơi phát hiện nền văn hóa Đông Sơn nổi tiếng với trống đồng và các hiện vật khảo cổ quý giá.',
+    articleContent: `
+## Cái nôi của nền văn minh Đông Sơn
+
+Di chỉ khảo cổ Đông Sơn nằm ở xã Đông Sơn, thành phố Thanh Hóa, là nơi các nhà khảo cổ học đã phát hiện ra nền văn hóa Đông Sơn - một nền văn hóa đồ đồng rực rỡ của người Việt cổ từ thế kỷ thứ 7 TCN đến thế kỷ 1 SCN.
+
+### Những phát hiện quan trọng
+
+*   **Trống đồng Đông Sơn:** Hiện vật tiêu biểu nhất, với hoa văn phong phú miêu tả đời sống và tín ngưỡng của người Việt cổ.
+*   **Công cụ sản xuất:** Rìu, cuốc, lưỡi cày bằng đồng cho thấy trình độ canh tác nông nghiệp phát triển.
+*   **Vũ khí và đồ trang sức:** Biểu hiện của một xã hội phân tầng với kỹ thuật luyện kim tiên tiến.
+
+Văn hóa Đông Sơn được xem là nền tảng của bản sắc văn hóa Việt Nam, với những giá trị vật chất và tinh thần đặc sắc.
+    `,
+    category: 'khao-co',
+    historicalFact: 'Trống đồng Ngọc Lũ, một trong những hiện vật tiêu biểu nhất của văn hóa Đông Sơn, được phát hiện vào năm 1893.',
+    type: 'location',
+  },
+  {
+    id: 'bao-tang-lich-su-quoc-gia',
+    name: 'Bảo tàng Lịch sử Quốc gia',
+    coordinates: { lat: 21.0245, lng: 105.8617 },
+    region: 'Bắc',
+    heroImage: '/images/locations/bao-tang-lich-su.jpg',
+    summary: 'Nơi lưu giữ và trưng bày các hiện vật quý giá về lịch sử Việt Nam từ thời tiền sử đến hiện đại.',
+    articleContent: `
+## Kho tàng di sản lịch sử
+
+Bảo tàng Lịch sử Quốc gia, tọa lạc tại số 1 đường Tràng Tiền, Hà Nội, là một trong những bảo tàng lớn nhất Việt Nam. Được thành lập năm 1958, bảo tàng hiện đang lưu giữ và trưng bày hơn 200.000 hiện vật quý giá, từ thời kỳ tiền sử đến cách mạng hiện đại.
+
+### Các bộ sưu tập nổi bật
+
+*   **Thời tiền sử và sơ sử:** Công cụ đá, đồ gốm của các nền văn hóa Hòa Bình, Bắc Sơn, Đông Sơn.
+*   **Thời kỳ phong kiến:** Hiện vật từ các triều đại Lý, Trần, Lê, Nguyễn.
+*   **Thời kỳ cận - hiện đại:** Tài liệu, hiện vật về các phong trào cách mạng và kháng chiến.
+
+Bảo tàng không chỉ là nơi lưu giữ di sản mà còn là điểm đến giáo dục lịch sử quan trọng cho mọi thế hệ người Việt Nam.
+    `,
+    category: 'bao-tang',
+    historicalFact: 'Bảo tàng Lịch sử Quốc gia được đặt trong một tòa nhà có kiến trúc Đông Dương (Indochine) đặc trưng, được xây dựng năm 1932.',
+    type: 'location',
+  }
+]; 
