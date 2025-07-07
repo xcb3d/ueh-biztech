@@ -42,36 +42,87 @@ const getRegionColor = (region: string): string => {
 
 const createLocationIcon = (location: MapPoint, isSelected: boolean, hasEvents: boolean) => {
   const color = location.type === 'location' ? getRegionColor(location.region) : '#8b5cf6'; // Màu tím cho làng nghề
-  const size = isSelected ? 48 : 40;
+  const size = isSelected ? 56 : 44;
   const zIndex = isSelected ? 1000 : 'auto';
-
+  
+  // Thêm hiệu ứng pulse animation cho marker được chọn
+  const pulseAnimation = isSelected ? `
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes ripple {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+  ` : '';
+  
+  // Thêm hiệu ứng glow cho marker
+  const glowEffect = `filter: drop-shadow(0px 0px 8px ${isSelected ? 'rgba(59, 130, 246, 0.7)' : 'rgba(0, 0, 0, 0.4)'});`;
+  
   const iconHtml = `
-    <div style="z-index: ${zIndex}; position: relative; transition: all 0.2s ease-in-out;">
-      <svg
-        width="${size}"
-        height="${size}"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style="filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.4));"
-      >
-        <path
-          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-          fill="${color}"
-        />
-        ${location.type === 'craft-village' && !isSelected ? '<path d="M12 15a3 3 0 110-6 3 3 0 010 6zm0-2a1 1 0 100-2 1 1 0 000 2z" fill="white"/>' : ''}
-        ${isSelected ? `<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>` : ''}
-      </svg>
-      ${hasEvents ? `
-        <div style="position: absolute; top: -2px; right: -2px; background: #facc15; width: 16px; height: 16px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.2);">
-          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#422006" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
-        </div>
+    <style>
+      ${pulseAnimation}
+      .marker-container {
+        position: relative;
+        z-index: ${zIndex};
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .marker-container:hover {
+        transform: translateY(-5px);
+      }
+      .marker-svg {
+        ${glowEffect}
+        transition: all 0.3s ease;
+      }
+      ${isSelected ? `
+        .pulse-circle {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: ${size * 1.3}px;
+          height: ${size * 1.3}px;
+          border-radius: 50%;
+          background-color: ${color}40;
+          animation: ripple 1.5s infinite ease-out;
+          z-index: -1;
+        }
+        .marker-main {
+          animation: pulse 2s infinite ease-in-out;
+        }
       ` : ''}
+    </style>
+    <div class="marker-container">
+      ${isSelected ? '<div class="pulse-circle"></div>' : ''}
+      <div class="marker-main">
+        <svg
+          width="${size}"
+          height="${size}"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="marker-svg"
+        >
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+            fill="${color}"
+          />
+          ${location.type === 'craft-village' && !isSelected ? '<path d="M12 15a3 3 0 110-6 3 3 0 010 6zm0-2a1 1 0 100-2 1 1 0 000 2z" fill="white"/>' : ''}
+          ${isSelected ? `<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="white" stroke-width="2" stroke-linejoin="round"/>` : ''}
+        </svg>
+        ${hasEvents ? `
+          <div style="position: absolute; top: -5px; right: -5px; background: linear-gradient(45deg, #f59e0b, #facc15); width: 20px; height: 20px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#422006" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+        ` : ''}
+      </div>
     </div>
   `;
 
@@ -86,7 +137,7 @@ const createLocationIcon = (location: MapPoint, isSelected: boolean, hasEvents: 
 
 // Component to fly to a location when it's selected and handle map state
 const MapController: React.FC = () => {
-  const { state } = useMapContext();
+  const { state, dispatch } = useMapContext();
   const map = useMap();
   
   // Effect to fly to selected location
@@ -94,10 +145,18 @@ const MapController: React.FC = () => {
     if (state.selectedLocation) {
       map.flyTo([state.selectedLocation.coordinates.lat, state.selectedLocation.coordinates.lng], 15, {
         animate: true,
-        duration: 1.5
+        duration: 1.5,
+        easeLinearity: 0.25
       });
+      
+      // Đánh dấu kết thúc chuyển tiếp sau khi hoàn thành animation
+      const transitionTimer = setTimeout(() => {
+        dispatch({ type: 'SET_LOCATION_TRANSITION_COMPLETE' });
+      }, 1600); // Thời gian hơi dài hơn duration để đảm bảo animation đã hoàn thành
+      
+      return () => clearTimeout(transitionTimer);
     }
-  }, [map, state.selectedLocation]);
+  }, [map, state.selectedLocation, dispatch]);
 
   // Effect to invalidate map size when sidebar toggles
   useEffect(() => {

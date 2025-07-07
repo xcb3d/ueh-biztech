@@ -42,7 +42,7 @@ export default function EventsPage() {
         new Date(b.startTime).getTime() - new Date(a.startTime).getTime()
       );
     }
-  }, [eventsWithLocation, regionFilter, sortBy]);
+  }, [eventsWithLocation, regionFilter, sortBy, now]);
   
   // Format date in a friendly way
   const formatEventDate = (dateString: string) => {

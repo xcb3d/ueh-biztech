@@ -5,7 +5,7 @@ export const events: Event[] = [
     id: 'le-hoi-phao-hoa-da-nang-2024',
     name: 'Lễ hội Pháo hoa Quốc tế Đà Nẵng 2024',
     locationId: 'danang-caurong',
-    heroImage: '/images/events/phao-hoa-da-nang.jpg',
+    heroImage: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     summary: 'Màn trình diễn pháo hoa mãn nhãn từ các đội thi quốc tế bên bờ sông Hàn thơ mộng.',
     articleContent: `
 ## Bữa Tiệc Ánh Sáng
@@ -27,7 +27,7 @@ Hãy đến Đà Nẵng để chiêm ngưỡng những "bức tranh" ánh sáng 
     id: 'pho-di-bo-ho-guom-cuoi-tuan',
     name: 'Không gian đi bộ Hồ Gươm',
     locationId: 'hanoi-hoguom',
-    heroImage: '/images/events/pho-di-bo.jpg',
+    heroImage: 'https://images.unsplash.com/photo-1555921015-5532091f6026?q=80&w=2070&auto=format&fit=crop',
     summary: 'Tận hưởng không khí trong lành và tham gia các hoạt động văn hóa, nghệ thuật đường phố đặc sắc.',
     articleContent: `
 ## Nhịp Sống Cuối Tuần
@@ -48,7 +48,7 @@ Vào mỗi cuối tuần, các tuyến đường xung quanh Hồ Gươm lại tr
     id: 'hoi-sach-dinh-doc-lap-2024',
     name: 'Hội sách TP. Hồ Chí Minh tại Dinh Độc Lập',
     locationId: 'hcm-dinhdoclap',
-    heroImage: '/images/events/hoi-sach.jpg',
+    heroImage: 'https://images.unsplash.com/photo-1555921015-5532091f6026?q=80&w=2070&auto=format&fit=crop',
     summary: 'Sự kiện văn hóa lớn dành cho những người yêu sách, quy tụ hàng trăm nhà xuất bản và hàng ngàn đầu sách.',
     articleContent: `
 ## Ngày Hội Của Người Yêu Sách

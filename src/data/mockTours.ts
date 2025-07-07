@@ -6,9 +6,9 @@ export const mockTours: Tour[] = [
     title: "Khám phá làng nghề gốm Bát Tràng truyền thống",
     description: "Trải nghiệm không gian làng nghề gốm sứ lâu đời nhất miền Bắc. Tham quan các lò gốm, học cách nặn gốm cùng nghệ nhân và mang về sản phẩm do chính tay bạn làm ra.",
     images: [
-      "/images/tours/bat-trang-1.jpg",
-      "/images/tours/bat-trang-2.jpg",
-      "/images/tours/bat-trang-3.jpg"
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     location: {
       name: "Làng gốm Bát Tràng",
@@ -38,8 +38,8 @@ export const mockTours: Tour[] = [
     title: "Tour làng lụa Vạn Phúc - Nét đẹp truyền thống Hà Đông",
     description: "Tham quan làng nghề dệt lụa truyền thống với lịch sử hơn ngàn năm tuổi. Tìm hiểu quy trình dệt lụa và thưởng thức những sản phẩm tinh xảo từ bàn tay khéo léo của các nghệ nhân.",
     images: [
-      "/images/tours/van-phuc-1.jpg",
-      "/images/tours/van-phuc-2.jpg"
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     location: {
       name: "Làng lụa Vạn Phúc",
@@ -68,8 +68,8 @@ export const mockTours: Tour[] = [
     title: "Khám phá làng tranh Đông Hồ - Bắc Ninh",
     description: "Hành trình về nguồn với nghệ thuật tranh dân gian Đông Hồ. Tìm hiểu cách làm giấy điệp, cách in tranh truyền thống và tham gia vào quá trình tạo ra một bức tranh Đông Hồ đặc trưng.",
     images: [
-      "/images/tours/dong-ho-1.jpg",
-      "/images/tours/dong-ho-2.jpg"
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     location: {
       name: "Làng tranh Đông Hồ",
@@ -98,8 +98,8 @@ export const mockTours: Tour[] = [
     title: "Tour làng hương Thủy Xuân - Huế",
     description: "Khám phá nghề làm hương truyền thống tại làng Thủy Xuân, Huế. Tìm hiểu về quy trình làm hương thủ công và tự tay làm những cây hương thơm ngát.",
     images: [
-      "/images/tours/thuy-xuan-1.jpg",
-      "/images/tours/thuy-xuan-2.jpg"
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     location: {
       name: "Làng hương Thủy Xuân",
@@ -128,8 +128,8 @@ export const mockTours: Tour[] = [
     title: "Khám phá làng nón Huế - Di sản văn hóa Việt",
     description: "Tham quan làng nghề làm nón lá truyền thống tại Huế. Tìm hiểu về lịch sử, quy trình làm nón và tự tay trang trí một chiếc nón lá độc đáo.",
     images: [
-      "/images/tours/non-la-1.jpg",
-      "/images/tours/non-la-2.jpg"
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     location: {
       name: "Làng nón Huế",
@@ -158,8 +158,8 @@ export const mockTours: Tour[] = [
     title: "Tour làng nghề kim hoàn Châu Khê - Bắc Ninh",
     description: "Khám phá làng nghề kim hoàn lâu đời với những sản phẩm vàng bạc tinh xảo. Tìm hiểu về quy trình chế tác và bí quyết nghề từ các nghệ nhân lành nghề.",
     images: [
-      "/images/tours/chau-khe-1.jpg",
-      "/images/tours/chau-khe-2.jpg"
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     location: {
       name: "Làng kim hoàn Châu Khê",

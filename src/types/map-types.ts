@@ -34,8 +34,12 @@ export interface Location {
   articleContent: string; // Full markdown content for the location's dedicated page
   category: Category;
   historicalFact: string;
+  openingHours?: string; // e.g., "08:00 - 17:00"
+  bestTimeToVisit?: string; // e.g., "Tháng 9 - Tháng 11"
+  visitorTips?: string; // A specific tip for visiting this location
   type: 'location';
   moments?: Moment[];
+  modelPath?: string;
 }
 
 // Represents an event that occurs at a specific location
@@ -94,6 +98,7 @@ export interface MapContextState {
   selectedTheme: string | null;
   isSidebarOpen: boolean;
   showOnlyLocationsWithEvents: boolean;
+  isLocationTransitioning: boolean;
 }
 
 // Actions for the map context
@@ -101,4 +106,5 @@ export type MapContextAction =
   | { type: 'SELECT_LOCATION'; payload: MapPoint | null }
   | { type: 'SET_THEME'; payload: string | null }
   | { type: 'TOGGLE_SIDEBAR' }
-  | { type: 'TOGGLE_EVENTS_FILTER' }; 
+  | { type: 'TOGGLE_EVENTS_FILTER' }
+  | { type: 'SET_LOCATION_TRANSITION_COMPLETE' }; 

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { craftVillages } from '@/data/craft-villages';
 import Link from 'next/link';
 import ProductDetailClient from './ProductDetailClient';
+import { FaChevronLeft, FaMapMarkerAlt } from 'react-icons/fa';
 
 // Hàm tìm sản phẩm từ tất cả làng nghề
 const findProductById = (id: string) => {
@@ -26,64 +27,80 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const { product, village } = result;
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
-      <div className="container mx-auto max-w-6xl px-4">
-        <div className="mb-6">
-          <Link href="/marketplace" className="text-purple-600 hover:text-purple-800 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Quay lại Marketplace
-          </Link>
+    <div className="bg-white min-h-screen">
+      {/* Hero Section */}
+      <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
+        <div className="absolute inset-0">
+          <Image 
+            src={product.image} 
+            alt={product.name} 
+            layout="fill" 
+            objectFit="cover"
+            priority
+            className="brightness-90"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         </div>
+        <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-16 z-10">
+          <Link href="/marketplace" className="mb-6 inline-flex items-center text-white hover:text-blue-200 transition-colors">
+            <FaChevronLeft className="mr-2" />
+            <span>Quay lại Marketplace</span>
+          </Link>
+          <span className="px-4 py-1.5 text-sm font-medium text-white bg-blue-600/80 backdrop-blur-sm rounded-full inline-block mb-4 w-fit">
+            {village.name}
+          </span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 max-w-4xl leading-tight drop-shadow-lg">
+            {product.name}
+          </h1>
+          <p className="text-2xl font-bold text-white/90 mb-6">
+            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)}
+          </p>
+        </div>
+      </div>
 
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Cột trái: Hình ảnh sản phẩm */}
-            <div className="p-6 flex items-center justify-center">
-              <div className="relative w-full h-96 rounded-lg overflow-hidden">
-                <Image 
-                  src={product.image} 
-                  alt={product.name} 
-                  layout="fill" 
-                  objectFit="contain" 
-                  className="bg-gray-50"
-                />
+      {/* Content Section */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Main Content */}
+          <div className="lg:col-span-8">
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-neutral-100">
+              <div className="prose prose-lg max-w-none prose-h2:text-2xl prose-h2:font-bold prose-h3:text-xl prose-h3:font-semibold prose-img:rounded-lg prose-p:text-neutral-700">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">Mô tả sản phẩm</h2>
+                <p>Sản phẩm thủ công mỹ nghệ độc đáo từ làng nghề truyền thống, được chế tác tỉ mỉ bởi những nghệ nhân lành nghề với bí quyết được truyền từ đời này sang đời khác.</p>
+                
+                <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Đặc điểm nổi bật</h3>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Sản phẩm thủ công 100%</li>
+                  <li>Chất liệu tự nhiên, an toàn</li>
+                  <li>Thiết kế độc đáo, tinh xảo</li>
+                  <li>Sản phẩm đặc trưng của làng nghề {village.name}</li>
+                </ul>
               </div>
             </div>
-
-            {/* Cột phải: Thông tin sản phẩm */}
-            <div className="p-8 flex flex-col">
-              <div className="flex-grow">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
-                
-                <div className="flex items-center mb-6">
-                  <span className="text-sm text-gray-500">Làng nghề:</span>
-                  <Link href={`/lang-nghe/${village.slug}`} className="ml-2 text-purple-600 hover:text-purple-800">
-                    {village.name}
-                  </Link>
-                </div>
-
-                <div className="text-2xl font-bold text-purple-600 mb-6">
-                  {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)}
-                </div>
-
-                <div className="prose prose-purple max-w-none mb-8">
-                  <h3 className="text-lg font-semibold mb-2">Mô tả sản phẩm</h3>
-                  <p>Sản phẩm thủ công mỹ nghệ độc đáo từ làng nghề truyền thống, được chế tác tỉ mỉ bởi những nghệ nhân lành nghề với bí quyết được truyền từ đời này sang đời khác.</p>
-                  
-                  <h3 className="text-lg font-semibold mt-4 mb-2">Đặc điểm nổi bật</h3>
-                  <ul>
-                    <li>Sản phẩm thủ công 100%</li>
-                    <li>Chất liệu tự nhiên, an toàn</li>
-                    <li>Thiết kế độc đáo, tinh xảo</li>
-                    <li>Sản phẩm đặc trưng của làng nghề {village.name}</li>
-                  </ul>
-                </div>
+          </div>
+          
+          {/* Sidebar */}
+          <div className="lg:col-span-4">
+            <div className="sticky top-20 space-y-8">
+              {/* Product Actions */}
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-100">
+                <ProductDetailClient product={product} />
               </div>
-
-              {/* Client component để xử lý thêm vào giỏ hàng */}
-              <ProductDetailClient product={product} />
+              
+              {/* Village Info */}
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-100">
+                <div className="flex items-center mb-4">
+                  <FaMapMarkerAlt className="text-blue-500 mr-2" size={18} />
+                  <h3 className="text-lg font-semibold text-neutral-800">Thông tin làng nghề</h3>
+                </div>
+                <p className="text-neutral-600 leading-relaxed mb-4">{village.summary}</p>
+                <Link 
+                  href={`/lang-nghe/${village.slug}`}
+                  className="inline-block px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg text-sm font-medium transition-colors"
+                >
+                  Xem chi tiết làng nghề
+                </Link>
+              </div>
             </div>
           </div>
         </div>

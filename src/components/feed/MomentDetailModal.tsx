@@ -19,6 +19,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { comments as allComments } from '@/data/commentData';
 import { users } from '@/data/userData';
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 interface MomentDetailModalProps {
@@ -73,25 +74,55 @@ const MomentDetailModalComponent: React.FC<MomentDetailModalProps> = ({ moment, 
   }
 
   const modalContent = (
-    <>
-      <div 
-        className="fixed inset-0 bg-white/80 dark:bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fade-in"
+    <AnimatePresence>
+      <motion.div 
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
         onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
       >
-        <button 
+        {/* Backdrop với hiệu ứng blur và gradient */}
+        <motion.div 
+          className="absolute inset-0 backdrop-blur-md"
+          initial={{ backdropFilter: "blur(0px)" }}
+          animate={{ backdropFilter: "blur(8px)" }}
+          exit={{ backdropFilter: "blur(0px)" }}
+          transition={{ duration: 0.4 }}
+          style={{
+            background: "radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, rgba(200,200,255,0.1) 100%)"
+          }}
+        />
+        
+        <motion.button 
           onClick={onClose} 
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-200/50 dark:bg-gray-800/50 text-black dark:text-white hover:bg-gray-300/70"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/30 backdrop-blur-md text-black hover:bg-white/50 transition-colors"
           aria-label="Đóng"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
           <XMarkIcon className="h-6 w-6" />
-        </button>
+        </motion.button>
         
-        <div 
-          className="bg-white dark:bg-gray-900 rounded-lg shadow-2xl w-full max-w-6xl max-h-[95vh] md:h-[720px] flex flex-col md:flex-row" 
+        <motion.div 
+          className="relative w-full max-w-6xl max-h-[95vh] md:h-[720px] flex flex-col md:flex-row overflow-hidden"
           onClick={(e) => e.stopPropagation()}
+          initial={{ y: 50, opacity: 0, scale: 0.9 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          exit={{ y: 50, opacity: 0, scale: 0.9 }}
+          transition={{ 
+            type: "spring", 
+            damping: 25, 
+            stiffness: 300
+          }}
         >
           {/* Image Slider Side */}
-          <div className="w-full md:w-1/2 bg-black relative flex items-center justify-center overflow-hidden">
+          <motion.div 
+            className="w-full md:w-1/2 bg-black relative flex items-center justify-center overflow-hidden rounded-l-lg"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+          >
             {images.length > 0 ? (
               <Swiper
                 modules={[Navigation, Pagination]}
@@ -117,78 +148,149 @@ const MomentDetailModalComponent: React.FC<MomentDetailModalProps> = ({ moment, 
             ) : (
               <div className="text-gray-500">Không có ảnh</div>
             )}
-          </div>
+          </motion.div>
           
-          {/* Content Side */}
-          <div className="w-full md:w-1/2 flex flex-col">
-            <div className="p-5 border-b dark:border-gray-700">
+          {/* Content Side - Glassmorphism Effect */}
+          <motion.div 
+            className="w-full md:w-1/2 flex flex-col rounded-r-lg"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.85)',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.2)',
+              border: '1px solid rgba(255, 255, 255, 0.18)'
+            }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <motion.div 
+              className="p-5 border-b border-white/20"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
               <div className="flex items-center space-x-3">
-                <Image src={moment.author.avatarUrl} alt={moment.author.name} width={44} height={44} className="rounded-full" />
+                <Image src={moment.author.avatarUrl} alt={moment.author.name} width={44} height={44} className="rounded-full ring-2 ring-white/50" />
                 <div>
-                  <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+                  <p className="text-sm font-semibold text-gray-800">
                     {moment.author.name}
                     {moment.feeling && feelings[moment.feeling] && (
-                      <span className="font-normal text-gray-600 dark:text-gray-400"> đang cảm thấy <span className="font-semibold">{feelings[moment.feeling].text} {feelings[moment.feeling].emoji}</span></span>
+                      <span className="font-normal text-gray-600"> đang cảm thấy <span className="font-semibold">{feelings[moment.feeling].text} {feelings[moment.feeling].emoji}</span></span>
                     )}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{new Date(moment.createdAt).toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                  <p className="text-xs text-gray-500">{new Date(moment.createdAt).toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Comments Section is the main scrollable area now */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+            <motion.div 
+              className="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
                {/* Post content is now inside the scrollable area */}
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">{moment.title}</h2>
-              <p className="text-gray-700 dark:text-gray-300 text-base">{moment.content}</p>
+              <motion.h2 
+                className="text-xl font-bold text-gray-900"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+              >
+                {moment.title}
+              </motion.h2>
+              <motion.p 
+                className="text-gray-700 text-base"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+              >
+                {moment.content}
+              </motion.p>
 
               {moment.hashtags && moment.hashtags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
+                <motion.div 
+                  className="flex flex-wrap gap-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                >
                   {moment.hashtags.map((tag, index) => (
-                    <span key={index} className="text-sm font-medium text-blue-600 hover:underline cursor-pointer">
+                    <span key={index} className="text-sm font-medium text-blue-600">
                       {tag}
                     </span>
                   ))}
-                </div>
+                </motion.div>
               )}
               
               {/* Divider */}
-              <hr className="border-gray-200 dark:border-gray-700 my-4" />
+              <hr className="border-white/20 my-4" />
 
               {/* Comments */}
-              {displayedComments.map(comment => (
-                <div key={comment.id} className="flex items-start space-x-3">
-                  <Image src={comment.author.avatarUrl} alt={comment.author.name} width={36} height={36} className="rounded-full" />
-                  <div className="flex-1">
-                    <div className="bg-gray-100 dark:bg-gray-700 rounded-xl p-3">
-                      <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">{comment.author.name}</p>
-                      <p className="text-sm text-gray-700 dark:text-gray-300">{comment.content}</p>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                {displayedComments.map((comment, index) => (
+                  <motion.div 
+                    key={comment.id} 
+                    className="flex items-start space-x-3 mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.9 + index * 0.1 }}
+                  >
+                    <Image src={comment.author.avatarUrl} alt={comment.author.name} width={36} height={36} className="rounded-full" />
+                    <div className="flex-1">
+                      <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 shadow-sm">
+                        <p className="text-sm font-semibold text-gray-800">{comment.author.name}</p>
+                        <p className="text-sm text-gray-700">{comment.content}</p>
+                      </div>
+                       <p className="text-xs text-gray-500 mt-1">{new Date(comment.createdAt).toLocaleDateString('vi-VN', { day: 'numeric', month: 'numeric', year: 'numeric' })}</p>
                     </div>
-                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{new Date(comment.createdAt).toLocaleDateString('vi-VN', { day: 'numeric', month: 'numeric', year: 'numeric' })}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
 
             {/* Actions and Comment Input are at the bottom */}
-            <div className="mt-auto">
-              <div className="px-5 py-3 border-t dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 flex justify-between">
+            <motion.div 
+              className="mt-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 }}
+            >
+              <div className="px-5 py-3 border-t border-white/20 bg-white/10 backdrop-blur-sm flex justify-between">
                 <div className="flex space-x-4">
-                  <button onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); setLikeCount(p => isLiked ? p - 1 : p + 1); }} className="flex items-center space-x-1 text-gray-500 hover:text-blue-600">
+                  <motion.button 
+                    onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); setLikeCount(p => isLiked ? p - 1 : p + 1); }} 
+                    className="flex items-center space-x-1 text-gray-500"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     {isLiked ? <HeartIconSolid className="h-5 w-5 text-red-500" /> : <HeartIconOutline className="h-5 w-5" />}
                     <span className="text-sm">{likeCount}</span>
-                  </button>
-                  <button className="flex items-center space-x-1 text-gray-500 hover:text-blue-600">
+                  </motion.button>
+                  <motion.button 
+                    className="flex items-center space-x-1 text-gray-500"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <ChatBubbleLeftRightIcon className="h-5 w-5" />
                     <span className="text-sm">{displayedComments.length}</span>
-                  </button>
+                  </motion.button>
                 </div>
-                <button onClick={(e) => e.stopPropagation()} className="text-gray-500 hover:text-blue-600">
+                <motion.button 
+                  onClick={(e) => e.stopPropagation()} 
+                  className="text-gray-500"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <ShareIcon className="h-5 w-5" />
-                </button>
+                </motion.button>
               </div>
               
-              <div className="p-3 border-t dark:border-gray-700">
+              <div className="p-3 border-t border-white/20 bg-white/30 backdrop-blur-sm">
                 <form onSubmit={handleCommentSubmit} className="flex items-center space-x-2">
                   <Image src={users.find(u => u.id === 'user-1')!.avatarUrl} alt="Your avatar" width={36} height={36} className="rounded-full" />
                   <input
@@ -196,19 +298,25 @@ const MomentDetailModalComponent: React.FC<MomentDetailModalProps> = ({ moment, 
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     placeholder="Viết bình luận..."
-                    className="w-full bg-gray-100 dark:bg-gray-700 border-none rounded-full py-2 px-4 focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full bg-white/50 backdrop-blur-sm border-none rounded-full py-2 px-4 focus:ring-2 focus:ring-blue-500 text-sm"
                   />
-                  <button type="submit" className="text-blue-600 font-semibold text-sm hover:text-blue-700 disabled:text-gray-400" disabled={!newComment.trim()}>
+                  <motion.button 
+                    type="submit" 
+                    className="text-blue-600 font-semibold text-sm disabled:text-gray-400"
+                    disabled={!newComment.trim()}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     Gửi
-                  </button>
+                  </motion.button>
                 </form>
               </div>
-            </div>
+            </motion.div>
 
-          </div>
-        </div>
-      </div>
-    </>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 
   const modalRoot = document.getElementById('modal-root');
@@ -234,6 +342,20 @@ const styles = `
 .swiper-button-next:after, .swiper-button-prev:after {
   font-size: 18px !important;
   font-weight: bold;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 `;
 

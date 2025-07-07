@@ -9,6 +9,7 @@ import { memoryTypes } from '@/data/memoryData';
 import { feelings } from '@/data/feelingData';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import { motion } from 'framer-motion';
 
 interface MomentCardProps {
   moment: Moment;
@@ -70,7 +71,6 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
             alt={moment.title}
             layout="fill"
             objectFit="cover"
-            className="transition-transform duration-300 ease-in-out group-hover:scale-105"
           />
         </div>
       );
@@ -86,7 +86,6 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
                 alt={`${moment.title} - ảnh ${index + 1}`}
                 layout="fill"
                 objectFit="cover"
-                className="transition-transform duration-300 ease-in-out group-hover:scale-105"
               />
             </div>
           ))}
@@ -103,7 +102,6 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
               alt={`${moment.title} - ảnh 1`}
               layout="fill"
               objectFit="cover"
-              className="transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
           </div>
           <div className="grid grid-rows-2 gap-1 h-full">
@@ -114,7 +112,6 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
                   alt={`${moment.title} - ảnh ${index + 2}`}
                   layout="fill"
                   objectFit="cover"
-                  className="transition-transform duration-300 ease-in-out group-hover:scale-105"
                 />
               </div>
             ))}
@@ -133,7 +130,6 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
             alt={`${moment.title} - ảnh 1`}
             layout="fill"
             objectFit="cover"
-            className="transition-transform duration-300 ease-in-out group-hover:scale-105"
           />
         </div>
         
@@ -146,7 +142,6 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
               alt={`${moment.title} - ảnh 2`}
               layout="fill"
               objectFit="cover"
-              className="transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
           </div>
           
@@ -157,7 +152,6 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
               alt={`${moment.title} - ảnh 3`}
               layout="fill"
               objectFit="cover"
-              className="transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
             
             {/* Lớp phủ hiển thị số ảnh còn lại */}
@@ -174,9 +168,12 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
 
   return (
     <>
-      <div 
+      <motion.div 
         onClick={handleCardClick}
-        className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200/80 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+        className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200/80 cursor-pointer"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
       >
         <div className="p-5">
           {/* Post Header */}
@@ -186,7 +183,7 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
               alt={moment.author.name}
               width={44}
               height={44}
-              className="rounded-full"
+              className="rounded-full ring-2 ring-white shadow-sm"
             />
             <div>
               <p className="text-sm font-semibold text-gray-800">
@@ -209,7 +206,7 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
         {/* Clickable Content Area */}
         <div className="px-5 pb-3">
           <div className="flex items-center mb-2">
-            <h2 className="text-xl font-bold text-gray-900 mr-2 group-hover:text-blue-600 transition-colors">{moment.title}</h2>
+            <h2 className="text-xl font-bold text-gray-900 mr-2">{moment.title}</h2>
             <span 
               className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
               style={{ 
@@ -226,7 +223,10 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
           {moment.hashtags && moment.hashtags.length > 0 && (
             <div className="mt-3 flex flex-wrap gap-2">
               {moment.hashtags.map((tag, index) => (
-                <span key={index} className="text-sm font-medium text-blue-600 hover:underline cursor-pointer">
+                <span 
+                  key={index} 
+                  className="text-sm font-medium text-blue-600"
+                >
                   {tag}
                 </span>
               ))}
@@ -240,37 +240,43 @@ const MomentCard: React.FC<MomentCardProps> = ({ moment, onCardClick }) => {
         {/* Post Actions */}
         <div className="px-5 py-3 border-t border-gray-100 bg-gray-50/50 flex justify-between">
           <div className="flex space-x-4">
-            <button 
+            <motion.button 
               onClick={handleLikeClick}
-              className="flex items-center space-x-1 text-gray-500 hover:text-blue-600"
+              className="flex items-center space-x-1 text-gray-500"
+              whileTap={{ scale: 0.9 }}
             >
               {isLiked ? (
                 <HeartIconSolid className="h-5 w-5 text-red-500" />
               ) : (
                 <HeartIconOutline className="h-5 w-5" />
               )}
-              <span className="text-sm">{likeCount}</span>
-            </button>
-            
-            <button className="flex items-center space-x-1 text-gray-500 hover:text-blue-600">
+              <span>{likeCount}</span>
+            </motion.button>
+            <motion.button 
+              className="flex items-center space-x-1 text-gray-500"
+              whileTap={{ scale: 0.9 }}
+            >
               <ChatBubbleLeftRightIcon className="h-5 w-5" />
-              <span className="text-sm">{commentCount}</span>
-            </button>
+              <span>{commentCount}</span>
+            </motion.button>
           </div>
-          
-          <button 
+          <motion.button 
             onClick={handleShareClick}
-            className="text-gray-500 hover:text-blue-600"
+            className="flex items-center space-x-1 text-gray-500"
+            whileTap={{ scale: 0.9 }}
           >
             <ShareIcon className="h-5 w-5" />
-          </button>
+            <span className="text-sm">Chia sẻ</span>
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
+
+      {/* Lightbox for image viewing */}
       <Lightbox
         open={openLightbox}
         close={() => setOpenLightbox(false)}
-        slides={images.map(img => ({ src: img }))}
         index={lightboxIndex}
+        slides={images.map(src => ({ src }))}
       />
     </>
   );

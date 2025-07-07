@@ -8,6 +8,7 @@ import { memories as allMoments } from '@/data/memoryData';
 import { events as allEvents } from '@/data/eventData';
 import SelectedPointDetail from './sidebar/SelectedPointDetail';
 import MapOverview from './sidebar/MapOverview';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 const MapSidebar: React.FC = () => {
   const { state, dispatch } = useMapContext();
@@ -102,35 +103,73 @@ const MapSidebar: React.FC = () => {
     dispatch({ type: 'SELECT_LOCATION', payload: null });
   };
 
+  const sidebarVariants: Variants = {
+    open: { 
+      x: 0
+    },
+    closed: { 
+      x: "-100%"
+    }
+  };
+
   return (
-    <aside
-      className={`absolute top-0 left-0 h-full bg-white shadow-lg z-[1000] transform transition-transform duration-500 ease-in-out flex flex-col
-        ${isSidebarOpen ? 'translate-x-0 w-full md:w-96' : '-translate-x-full w-full md:w-96'}`}
+    <motion.aside
+      className="absolute top-0 left-0 h-full z-[1000] w-full md:w-96 flex flex-col"
+      initial="closed"
+      animate={isSidebarOpen ? "open" : "closed"}
+      variants={sidebarVariants}
+      transition={{ 
+        type: "spring", 
+        stiffness: 300, 
+        damping: 30 
+      }}
     >
-      {selectedLocation ? (
-        <SelectedPointDetail 
-          point={selectedLocation}
-          onBack={goBackToMapOverview}
-        />
-      ) : (
-        <MapOverview 
-          searchTerm={searchTerm}
-          onSearchTermChange={setSearchTerm}
-          searchResults={searchResults}
-          onSearchResultClick={handleSearchResultClick}
-          showOnlyLocationsWithEvents={state.showOnlyLocationsWithEvents}
-          onToggleEventsFilter={() => dispatch({ type: 'TOGGLE_EVENTS_FILTER' })}
-          latestMoments={latestMoments}
-          onMomentClick={handleMomentClick}
-          upcomingEvents={upcomingEvents}
-          isEventToday={isEventToday}
-          formatEventDate={formatEventDate}
-          allLocations={allLocations}
-          selectedTheme={state.selectedTheme}
-          onThemeClick={handleThemeClick}
-        />
-      )}
-    </aside>
+      <div className="h-full backdrop-blur-md bg-white/90 shadow-lg border-r border-white/20 overflow-hidden flex flex-col">
+        <AnimatePresence mode="wait">
+          {selectedLocation ? (
+            <motion.div 
+              key="details"
+              className="h-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <SelectedPointDetail 
+                point={selectedLocation}
+                onBack={goBackToMapOverview}
+              />
+            </motion.div>
+          ) : (
+            <motion.div 
+              key="overview"
+              className="h-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <MapOverview 
+                searchTerm={searchTerm}
+                onSearchTermChange={setSearchTerm}
+                searchResults={searchResults}
+                onSearchResultClick={handleSearchResultClick}
+                showOnlyLocationsWithEvents={state.showOnlyLocationsWithEvents}
+                onToggleEventsFilter={() => dispatch({ type: 'TOGGLE_EVENTS_FILTER' })}
+                latestMoments={latestMoments}
+                onMomentClick={handleMomentClick}
+                upcomingEvents={upcomingEvents}
+                isEventToday={isEventToday}
+                formatEventDate={formatEventDate}
+                allLocations={allLocations}
+                selectedTheme={state.selectedTheme}
+                onThemeClick={handleThemeClick}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.aside>
   );
 };
 

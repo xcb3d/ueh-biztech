@@ -9,6 +9,7 @@ const initialState: MapContextState = {
   selectedTheme: null,
   isSidebarOpen: true,
   showOnlyLocationsWithEvents: false,
+  isLocationTransitioning: false,
 };
 
 const MapContext = createContext<{
@@ -24,10 +25,14 @@ const mapReducer = (state: MapContextState, action: MapContextAction): MapContex
   switch (action.type) {
     case 'SELECT_LOCATION':
       const newSelectedLocation = state.selectedLocation?.id === action.payload?.id ? null : action.payload;
+      
+      const isTransitioning = newSelectedLocation !== null && state.selectedLocation?.id !== newSelectedLocation?.id;
+      
       return {
         ...state,
         selectedLocation: newSelectedLocation,
         isSidebarOpen: !!newSelectedLocation || state.isSidebarOpen, // Open sidebar when a location is selected
+        isLocationTransitioning: isTransitioning,
       };
     case 'SET_THEME':
       return {
@@ -43,6 +48,11 @@ const mapReducer = (state: MapContextState, action: MapContextAction): MapContex
       return {
         ...state,
         showOnlyLocationsWithEvents: !state.showOnlyLocationsWithEvents,
+      };
+    case 'SET_LOCATION_TRANSITION_COMPLETE':
+      return {
+        ...state,
+        isLocationTransitioning: false,
       };
     default:
       return state;

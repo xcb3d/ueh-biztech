@@ -5,10 +5,12 @@ import { locations } from '@/data/locationData';
 import { memories as allMemories } from '@/data/memoryData';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import DetailPageLayout from '@/components/details/DetailPageLayout';
 import ChatBot from '@/components/ai/ChatBot';
+import ModelViewer from '@/components/common/ModelViewer';
+import ModernDetailPageLayout from '@/components/details/ModernDetailPageLayout';
+import ModernSidebar from '@/components/details/ModernSidebar';
+import LocationExtraInfo from '@/components/details/LocationExtraInfo';
 
 export default function LocationDetailPage() {
   const params = useParams();
@@ -17,46 +19,58 @@ export default function LocationDetailPage() {
   const location = locations.find(loc => loc.id === id);
   
   if (!location) {
-    // If no location is found, render the 404 page
     notFound();
   }
 
-  const relatedMemories = allMemories.filter(mem => mem.locationId === id);
+  const relatedMemories = allMemories
+    .filter(mem => mem.locationId === id)
+    .map(mem => ({ id: mem.id, title: mem.title }));
 
+  // Main content with markdown
   const mainContent = (
     <ReactMarkdown remarkPlugins={[remarkGfm]}>
       {location.articleContent}
     </ReactMarkdown>
   );
 
+  // Extra Info component
+  const extraInfoContent = (
+    <LocationExtraInfo 
+      coordinates={location.coordinates} 
+      region={location.region}
+      openingHours={location.openingHours}
+      bestTimeToVisit={location.bestTimeToVisit}
+      visitorTips={location.visitorTips}
+    />
+  );
+
+  // 3D Model content (if available)
+  const modelContent = location.modelPath ? (
+    <div className="p-6">
+      <ModelViewer modelPath={location.modelPath} />
+    </div>
+  ) : null;
+
+  // Modern sidebar with summary, historical fact, and related memories
   const sidebarContent = (
-    <>
-      <div className="bg-white p-6 rounded-xl shadow-lg">
-        <h3 className="text-xl font-bold text-gray-800 border-b pb-3 mb-4">Tóm tắt</h3>
-        <p className="text-gray-600">{location.summary}</p>
-      </div>
-      
-      <div className="mt-8 bg-white p-6 rounded-xl shadow-lg">
-        <h3 className="text-xl font-bold text-gray-800 border-b pb-3 mb-4">Các ký ức liên quan ({relatedMemories.length})</h3>
-        {relatedMemories.length > 0 ? (
-          <Link href={`/#memory-feed-for-${id}`} className="text-blue-600 hover:underline">
-            Xem trên Dòng chảy &rarr;
-          </Link>
-        ) : (
-          <p className="text-sm text-gray-500">Chưa có ký ức nào được chia sẻ.</p>
-        )}
-      </div>
-    </>
+    <ModernSidebar
+      summary={location.summary}
+      historicalFact={location.historicalFact}
+      relatedMemories={relatedMemories}
+      locationId={id}
+    />
   );
 
   return (
     <>
-      <DetailPageLayout
+      <ModernDetailPageLayout
         title={location.name}
         badge={location.region}
         heroImage={location.heroImage}
         mainContent={mainContent}
+        modelContent={modelContent}
         sidebarContent={sidebarContent}
+        extraInfoContent={extraInfoContent}
       />
       <ChatBot 
         entityType="location"

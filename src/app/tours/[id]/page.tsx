@@ -1,5 +1,4 @@
 import { mockTours } from "@/data/mockTours";
-import { Tour } from "@/types/tour";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";

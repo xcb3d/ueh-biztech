@@ -18,7 +18,8 @@ const nextConfig: NextConfig = {
       'c.basemaps.cartocdn.com',
       'i.pravatar.cc',
       'picsum.photos',
-      'plus.unsplash.com'
+      'plus.unsplash.com',
+      'unsplash.com'
     ],
   },
 };
